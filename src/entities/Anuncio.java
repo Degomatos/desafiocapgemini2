@@ -25,6 +25,9 @@ public class Anuncio {
 		if (!finalDate.after(initialDate)) {
 			throw new DomainException("A data final não pode ser anterior a data inicial!");
 		}
+		if(initialDate.equals(finalDate)) {
+			throw new DomainException("A data final não pode ser igual a data inicial!");
+		}
 		
 		this.nameAd = nameAd;
 		this.initialDate = initialDate;
