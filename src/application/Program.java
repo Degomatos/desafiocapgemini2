@@ -22,9 +22,9 @@ public class Program {
 		List<Anuncio> list = new ArrayList<>();
 		int option =0;
 		
+		System.out.println("Bem Vindo ao sistema de cadastro de Anuncios!");
 		do {
 			try {	
-				System.out.println("Bem Vindo ao sistema de cadastro de Anuncios!");
 				System.out.println("Por favor digite o número correspondente a opção para prosseguir:");
 				System.out.println("1) Para cadastrar um novo Anuncio");
 				System.out.println("2) Para visualizar o relatório dos Anuncios cadastrados");
@@ -64,34 +64,54 @@ public class Program {
 					}					
 					break;
 				}
-				case 3:{
+				case 3:{//OK
 					verifyVoidList(list);
 					System.out.printf("Por favor digite o nome do cliente para iniciar a pesquisa: ");
 					String source = sc.nextLine();
+					int count = 0;
 					for (Anuncio ad: list) {
-						if(ad.getClient().getName().equals(source))
+						if(ad.getClient().getName().equals(source)) {
+							System.out.println("Cliente localizado:");
+							System.out.println("---------------------------------------");
 							System.out.println(ad);
-						else
-							System.out.println("Não foi encontrado nenhum cliente cadastrado com esse nome.");
+							count = 1;
+						}
 					}
+					if(count == 0)
+						System.out.println("Não foi encontrado nenhum cliente cadastrado com esse nome.");
 					break;
 				}
-				case 4: {
+				case 4: {//OK
 					verifyVoidList(list);
 					System.out.printf("Por favor digite a data a ser pesquisada (dd/MM/yyyy): ");
 					Date source = sdf.parse(sc.next());
 					sc.nextLine();
+					int count = 0;
 					for (Anuncio ad : list) {
-						if(ad.getInitialDate().before(source) && ad.getFinalDate().after(source))
+						if(ad.getInitialDate().before(source) && ad.getFinalDate().after(source)) {
+							System.out.println("Anúncio localizado dentro do intervalo de tempo digitado:");
+							System.out.println("---------------------------------------");
 							System.out.println(ad);
-						if(ad.getFinalDate().equals(source))
+							count = 1;
+						}
+						if(ad.getInitialDate().equals(source)) {
+							System.out.printf("Anúncio localizado com data inicial em: %s \n",sdf.format(source));
+							System.out.println("---------------------------------------");
 							System.out.println(ad);
-						if(ad.getInitialDate().equals(source))
+							count = 1;
+						}
+						if(ad.getFinalDate().equals(source)) {
+							System.out.printf("Anúncio localizado com data final em: %s \n",sdf.format(source));
+							System.out.println("---------------------------------------");
 							System.out.println(ad);
+							count = 1;
+						}
 					}
+					if (count == 0)
+						System.out.println("Nenhum anúncio localizado para a data digitada.");
 					break;
 				}
-				case 5: {
+				case 5: {//OK
 					System.out.println("Interação encerrada!");
 					System.out.println("Obrigado por ter utilizado este sistema. Espero que tenha gostado.");
 					break;
@@ -113,7 +133,6 @@ public class Program {
 				System.out.println("Ocorreu um erro durante a solicitação: "+e.getMessage());
 				System.out.println();
 			}
-			System.out.println();
 		}while(option!=5);
 
 		sc.close();

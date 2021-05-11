@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import exception.DomainException;
 import services.Calculadora;
 
-public class Anuncio {
+public class Anuncio extends Calculadora {
 	
 	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	private String nameAd;
@@ -15,7 +15,6 @@ public class Anuncio {
 	private Date finalDate;
 	private double investimentPerDay;
 	private Cliente client;
-	private Calculadora calc;
 
 //Constructor
 	public Anuncio(String nameAd, Date initialDate, Date finalDate, double investimentPerDay, Cliente client) {
@@ -27,15 +26,13 @@ public class Anuncio {
 		}
 		if(initialDate.equals(finalDate)) {
 			throw new DomainException("A data final não pode ser igual a data inicial!");
-		}
-		
+		}		
 		this.nameAd = nameAd;
 		this.initialDate = initialDate;
 		this.finalDate = finalDate;
 		this.investimentPerDay = investimentPerDay;
 		this.client = client;
-		calc = new Calculadora();
-		calc.totalCalc(investimentPerDay);
+		super.totalCalc(investimentPerDay);
 	}
 
 //Getter and Setters
@@ -73,9 +70,9 @@ public class Anuncio {
 				+"Data inicial do anuncio: "+sdf.format(initialDate)+String.format("\n")
 				+"Data final do anuncio: "+sdf.format(finalDate)+String.format("\n")
 				+"Total investido: R$"+String.format("%.2f", totalInvestiment())+String.format("\n")
-				+"Total aproximado de visualizações: "+String.format("%.0f", calc.getTotalViews())+String.format("\n")
-				+"Total aproximado de cliques: "+String.format("%.0f", calc.getTotalClick())+String.format("\n")
-				+"Total aproximado de compartilhamentos: "+String.format("%.0f", calc.getTotalShare())+String.format("\n");		
+				+"Total aproximado de visualizações: "+String.format("%.0f", getTotalViews())+String.format("\n")
+				+"Total aproximado de cliques: "+String.format("%.0f", getTotalClick())+String.format("\n")
+				+"Total aproximado de compartilhamentos: "+String.format("%.0f", getTotalShare())+String.format("\n");		
 	}
 	
 }
