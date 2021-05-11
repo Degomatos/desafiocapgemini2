@@ -35,7 +35,7 @@ public class Program {
 				sc.nextLine();
 
 				switch (option) {
-				case 1: {
+				case 1: {//OK
 					System.out.printf("Digite o nome do anuncio: ");
 					String nameAd = sc.nextLine();
 					System.out.printf("Digite o nome do Cliente: ");
@@ -52,6 +52,7 @@ public class Program {
 					Anuncio ad = new Anuncio(nameAd, initialDate, finalDate, investimentPerDay, client);
 					list.add(ad);	
 					System.out.println("Anúncio cadastrado com sucesso!");
+					System.out.println();
 					break;
 				}
 				case 2:{ //OK
@@ -107,8 +108,10 @@ public class Program {
 							count = 1;
 						}
 					}
-					if (count == 0)
+					if (count == 0) {
 						System.out.println("Nenhum anúncio localizado para a data digitada.");
+						System.out.println();
+					}
 					break;
 				}
 				case 5: {//OK
