@@ -18,8 +18,7 @@ public class Program {
 	public static void main(String[] args) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
-		
+		Scanner sc = new Scanner(System.in);	
 		List<Anuncio> list = new ArrayList<>();
 		int option =0;
 		
@@ -37,7 +36,6 @@ public class Program {
 
 				switch (option) {
 				case 1: {
-
 					System.out.printf("Digite o nome do anuncio: ");
 					String nameAd = sc.nextLine();
 					System.out.printf("Digite o nome do Cliente: ");
@@ -56,27 +54,35 @@ public class Program {
 					System.out.println("Anúncio cadastrado com sucesso!");
 					break;
 				}
-				case 2:{
+				case 2:{ //OK
+					verifyVoidList(list);
+					System.out.println("Esses são todos os anuncios cadastrados no sistema até o momento:");
+					System.out.println("---------------------------------------");
 					for (Anuncio ad : list) {
 						System.out.println(ad);
+						System.out.println("---------------------------------------");
 					}					
 					break;
 				}
 				case 3:{
+					verifyVoidList(list);
 					System.out.printf("Por favor digite o nome do cliente para iniciar a pesquisa: ");
 					String source = sc.nextLine();
 					for (Anuncio ad: list) {
 						if(ad.getClient().getName().equals(source))
 							System.out.println(ad);
+						else
+							System.out.println("Não foi encontrado nenhum cliente cadastrado com esse nome.");
 					}
 					break;
 				}
 				case 4: {
+					verifyVoidList(list);
 					System.out.printf("Por favor digite a data a ser pesquisada (dd/MM/yyyy): ");
 					Date source = sdf.parse(sc.next());
 					sc.nextLine();
 					for (Anuncio ad : list) {
-						if(ad.getInitialDate().after(source) && ad.getFinalDate().before(source))
+						if(ad.getInitialDate().before(source) && ad.getFinalDate().after(source))
 							System.out.println(ad);
 						if(ad.getFinalDate().equals(source))
 							System.out.println(ad);
@@ -104,7 +110,7 @@ public class Program {
 				sc.nextLine();
 			}
 			catch (DomainException e) {
-				System.out.println("Ocorreu um erro durante o cadastro: "+e.getMessage());
+				System.out.println("Ocorreu um erro durante a solicitação: "+e.getMessage());
 				System.out.println();
 			}
 			System.out.println();
@@ -113,5 +119,8 @@ public class Program {
 		sc.close();
 
 	}
-	
+	public static void verifyVoidList(List<Anuncio> list) {
+		if (list.size()==0)
+			throw new DomainException("Ainda não há anúncios cadastrados no sistema.");
+	}
 }

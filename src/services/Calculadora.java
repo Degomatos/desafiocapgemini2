@@ -25,8 +25,7 @@ public class Calculadora {
 	}
 	
 	public void totalCalc(double investiment) {
-
-		views = investiment*30; //30 peoples view the ads
+		views = investiment*30; //30 peoples view the ads per each R$1.00
 		totalViews = views;
 		
 		for(int i=0;i<3;i++){
