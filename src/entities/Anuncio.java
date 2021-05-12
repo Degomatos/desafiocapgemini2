@@ -21,7 +21,7 @@ public class Anuncio extends Calculadora {
 		if (investimentPerDay <0) {
 			throw new DomainException("O valor do investimento não pode ser negativo.");
 		}
-		if (!finalDate.after(initialDate)) {
+		if (finalDate.before(initialDate)) {
 			throw new DomainException("A data final não pode ser anterior a data inicial!");
 		}
 		if(initialDate.equals(finalDate)) {
