@@ -22,14 +22,14 @@ static Scanner sc = new Scanner(System.in);
 		List<Anuncio> list = new ArrayList<>();
 		int option =0;
 		
-		System.out.println("Bem Vindo ao sistema de cadastro de Anuncios!");
+		System.out.println("Bem Vindo ao sistema de cadastro de Anúncios!");
 		do {
 			try {	
-				System.out.println("Por favor digite o nÃºmero correspondente a opÃ§Ã£o para prosseguir:");
-				System.out.println("1) Para cadastrar um novo Anuncio");
-				System.out.println("2) Para visualizar o relatÃ³rio dos Anuncios cadastrados");
-				System.out.println("3) Para pesquisar anuncio pelo nome do cliente");
-				System.out.println("4) Para pesquisar anuncio por data");
+				System.out.println("Por favor digite o número correspondente a opção para prosseguir:");
+				System.out.println("1) Para cadastrar um novo Anúncio");
+				System.out.println("2) Para visualizar o relatório dos Anúncios cadastrados");
+				System.out.println("3) Para pesquisar anúncio pelo nome do cliente");
+				System.out.println("4) Para pesquisar anúncio por data");
 				System.out.println("5) Para finalizar o sistema");
 				option = sc.nextInt();
 				sc.nextLine();
@@ -55,25 +55,25 @@ static Scanner sc = new Scanner(System.in);
 					break;
 				}
 				case 5: {//OK
-					System.out.println("InteraÃ§Ã£o encerrada!");
+					System.out.println("Interação encerrada!");
 					System.out.println("Obrigado por ter utilizado este sistema. Espero que tenha gostado.");
 					break;
 				}
 				default:
-					System.out.println("OpÃ§Ã£o InvÃ¡lida.");
+					System.out.println("Opção Inválida.");
 				}
 			}
 			catch (ParseException e) {
-				System.out.println("A data digitada nÃ£o Ã© vÃ¡lida. Tente Novamente!");
+				System.out.println("A data digitada não é válida. Tente Novamente!");
 				System.out.println();
 			}
 			catch (InputMismatchException e) {
-				System.out.println("O valor digitado nÃ£o Ã© vÃ¡lido. Tente Novamente!");
+				System.out.println("O valor digitado não é válido. Tente Novamente!");
 				System.out.println();
 				sc.nextLine();
 			}
 			catch (DomainException e) {
-				System.out.println("Ocorreu um erro durante a solicitaÃ§Ã£o: "+e.getMessage());
+				System.out.println("Ocorreu um erro durante a solicitação: "+e.getMessage());
 				System.out.println();
 			}
 		}while(option!=5);
@@ -84,17 +84,17 @@ static Scanner sc = new Scanner(System.in);
 //Methods
 	public static void verifyVoidList(List<Anuncio> list) {
 		if (list.size()==0)
-			throw new DomainException("Ainda nÃ£o hÃ¡ anÃºncios cadastrados no sistema.");
+			throw new DomainException("Ainda não há anúncios cadastrados no sistema.");
 	}
 	
 	public static Anuncio registerNewAd() throws ParseException{
-		System.out.printf("Digite o nome do anuncio: ");
+		System.out.printf("Digite o nome do anúncio: ");
 		String nameAd = sc.nextLine();
 		System.out.printf("Digite o nome do Cliente: ");
 		String name = sc.nextLine();
-		System.out.printf("Digite a data de inÃ­cio do anÃºncio (dd/MM/yyyy): ");
+		System.out.printf("Digite a data de início do anúncio (dd/MM/yyyy): ");
 		Date initialDate = sdf.parse(sc.next());
-		System.out.printf("Digite a data de tÃ©rmino do anÃºncio (dd/MM/yyyy): ");
+		System.out.printf("Digite a data de término do anúncio (dd/MM/yyyy): ");
 		sc.nextLine();
 		Date finalDate = sdf.parse(sc.next());
 		System.out.printf("Quanto deseja investir por dia, em reais: R$");
@@ -102,13 +102,13 @@ static Scanner sc = new Scanner(System.in);
 		sc.nextLine();
 		Cliente client = new Cliente(name);
 		Anuncio ad = new Anuncio(nameAd, initialDate, finalDate, investimentPerDay, client);	
-		System.out.println("AnÃºncio cadastrado com sucesso!");
+		System.out.println("Anúncio cadastrado com sucesso!");
 		System.out.println();
 		return ad;
 	}
 	
 	public static void showAllAds(List<Anuncio> list) {
-		System.out.println("Estes sÃ£o todos os anuncios cadastrados no sistema atÃ© o momento:");
+		System.out.println("Estes são todos os anúncios cadastrados no sistema até o momento:");
 		System.out.println("---------------------------------------");
 		for (Anuncio ad : list) {
 			System.out.println(ad);
@@ -129,7 +129,7 @@ static Scanner sc = new Scanner(System.in);
 			}
 		}
 		if(count == 0)
-			System.out.println("NÃ£o foi encontrado nenhum cliente cadastrado com esse nome.");
+			System.out.println("Não foi encontrado nenhum cliente cadastrado com esse nome.");
 	}
 	
 	public static void sourcePerDate(List<Anuncio> list) throws ParseException {
@@ -139,26 +139,26 @@ static Scanner sc = new Scanner(System.in);
 		int count = 0;
 		for (Anuncio ad : list) {
 			if(ad.getInitialDate().before(source) && ad.getFinalDate().after(source)) {
-				System.out.println("AnÃºncio localizado dentro do intervalo de tempo digitado:");
+				System.out.println("Anúncio localizado dentro do intervalo de tempo digitado:");
 				System.out.println("---------------------------------------");
 				System.out.println(ad);
 				count = 1;
 			}
 			if(ad.getInitialDate().equals(source)) {
-				System.out.printf("AnÃºncio localizado com data inicial em: %s \n",sdf.format(source));
+				System.out.printf("Anúncio localizado com data inicial em: %s \n",sdf.format(source));
 				System.out.println("---------------------------------------");
 				System.out.println(ad);
 				count = 1;
 			}
 			if(ad.getFinalDate().equals(source)) {
-				System.out.printf("AnÃºncio localizado com data final em: %s \n",sdf.format(source));
+				System.out.printf("Anúncio localizado com data final em: %s \n",sdf.format(source));
 				System.out.println("---------------------------------------");
 				System.out.println(ad);
 				count = 1;
 			}
 		}
 		if (count == 0) {
-			System.out.println("Nenhum anÃºncio localizado para a data digitada.");
+			System.out.println("Nenhum anúncio localizado para a data digitada.");
 			System.out.println();
 		}
 	}
